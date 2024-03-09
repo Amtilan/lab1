@@ -1,8 +1,10 @@
 import os
- 
-path = "week_6\\File_handling"
+
+path = "C:\\Users\\РАЙЫМБЕК\\OneDrive\\Документы\\GitHub\\pp2-kbtu\\week_6\\File_handling"
 dir_list = os.listdir(path)
  
 print("Files and directories in '", path, "' :")
  
-print(dir_list)
+for i in dir_list:
+    print(i, end="\n")
+    

@@ -3,7 +3,7 @@
 
 import os
 
-path = r"week_6\File_handling"
+path = r"C:\\Users\\РАЙЫМБЕК\\OneDrive\\Документы\\GitHub\\pp2-kbtu\\week_6\\File_handling"
 
 print(os.path.exists(path))
 print(os.path.basename(path))
