@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
         player.check_end()
         current_time, total_time = player.get_duration().values()
-        gui.screen_update(current_time, total_time, player.images, player.get_volume(), *player.get_songs())
+        gui.update_screen(current_time, total_time, player.images, player.get_volume(), *player.get_songs())

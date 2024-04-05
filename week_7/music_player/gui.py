@@ -15,7 +15,7 @@ class GUI:
         pygame.display.set_caption("Music Player")
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-    def render_playlist(self, tracks, current_track_index):
+    def draw_playlist(self, tracks, current_track_index):
         playlist_part = 3
         vertical_playlist_part = 6
 
@@ -51,7 +51,7 @@ class GUI:
         seconds = str(int(time % 60)).zfill(2)
         return minutes, seconds
 
-    def render_time(self, time, total_time):
+    def draw_current_and_total_time(self, time, total_time):
         current_minutes, current_seconds = self.convert_to_time(time // 1000)
         total_minutes, total_seconds = self.convert_to_time(total_time)
 
@@ -63,7 +63,7 @@ class GUI:
 
         self.screen.blit(time_render, (1.25 * self.width // 3, 2.1 * self.height // 3))
         self.screen.blit(total_time_render, (2.6 * self.width // 3, 2.1 * self.height // 3))
-    def render_duration_border(self):
+    def draw_progress_bar_outline(self):
         pygame.draw.circle(self.screen, ("#4E0707"),
         (1.45 * self.width // 3, 2.15 * self.height // 3), 4)
 
@@ -74,7 +74,7 @@ class GUI:
         pygame.draw.circle(self.screen, ("#4E0707"),
         (2.55 * self.width // 3, 2.15 * self.height // 3), 4)
 
-    def render_duration(self, time, total_time):
+    def draw_progress_bar(self, time, total_time):
         percentage = time / total_time / 1000
         coordinate = percentage * (1.1 * self.width // 3) + 1.45 * self.width // 3
 
@@ -89,7 +89,7 @@ class GUI:
         pygame.draw.circle(self.screen, ("#420D09"),
         (coordinate, 2.15 * self.height // 3), 5)
 
-    def render_volume_border(self):
+    def draw_volume_control_outline(self):
         pygame.draw.circle(self.screen, ("#4E0707"),
         (self.width // 1.1, self.height // 10), 4)
 
@@ -100,7 +100,7 @@ class GUI:
         pygame.draw.circle(self.screen, ("#4E0707"),
         (self.width // 1.1, self.height // 1.6), 4)
         
-    def render_volume(self, volume, is_muted=False):
+    def draw_volume_control(self, volume, is_muted=False):
         volume_position = self.height // 1.6 - \
         volume * (self.height // 1.6 - self.height // 10)
 
@@ -118,7 +118,7 @@ class GUI:
         pygame.draw.circle(self.screen, color,
         (self.width // 1.1, self.height // 1.6), 3)
     
-    def render_buttons(self):
+    def draw_buttons(self):
         for button in self.buttons:
             coordinates = button.get_coordinates()
             color = button.get_color()
@@ -133,22 +133,22 @@ class GUI:
             if isinstance(button, CircleButton):
                 pygame.draw.circle(self.screen, color,
                 (coordinates['x'], coordinates['y']), coordinates['radius'])   
-    def render_track_image(self, image_name, x, y):
+    def draw_track_cover(self, image_name, x, y):
         "Отображение обложки трека."
         path = os.path.join('images', image_name)  
         surface = pygame.image.load(path).convert_alpha()
         surface = pygame.transform.scale(surface, (self.width // 3, self.width // 3))
         self.screen.blit(surface, (x, y))
 
-    def screen_update(self, time, total_time, image_name, volume_stat, tracks, index):
+    def update_screen(self, time, total_time, image_name, volume_stat, tracks, index):
         self.screen.fill("#020403")
-        self.render_track_image(image_name[index], self.width // 2, self.height // 12)
-        self.render_time(time, total_time)
-        self.render_buttons()
-        self.render_duration_border()
-        self.render_duration(time, total_time)
-        self.render_volume_border()
-        self.render_volume(volume_stat[0], volume_stat[1])
-        self.render_playlist(tracks, index)
+        self.draw_track_cover(image_name[index], self.width // 2, self.height // 12)
+        self.draw_current_and_total_time(time, total_time)
+        self.draw_buttons()
+        self.draw_progress_bar_outline()
+        self.draw_progress_bar(time, total_time)
+        self.draw_volume_control_outline()
+        self.draw_volume_control(volume_stat[0], volume_stat[1])
+        self.draw_playlist(tracks, index)
         pygame.display.update()
         self.clock.tick(15)
