@@ -35,7 +35,8 @@ if __name__ == '__main__':
     player.load_track(songs[0])
     while running:
         for event in pygame.event.get():
-            
+            if event.type == pygame.QUIT:
+                running = False
             if event.type in [pygame.KEYDOWN, pygame.MOUSEBUTTONDOWN]:
                 handler.process_events(event)
 
