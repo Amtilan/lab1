@@ -1,44 +1,29 @@
 class Button:
-    def __init__(self):
-        pass
-
-    def action(self, player):
-        pass
-
-    def collision(self, x, y):
-        pass
-
     def try_action(self, mouse_coords, player):
         mouse_x, mouse_y = mouse_coords
         if self.collision(mouse_x, mouse_y):
-                self.action(player)
-
-    def get_coordinates(self):
-        pass
+            self.action(player)
 
     def get_color(self):
         return self.color
 
 
 class RectButton(Button):
-    def __init__(self, left_top_coordinates, width, height, color=(255, 0 ,0)):
+    def __init__(self, left_top_coordinates, width, height, color=(255, 0, 0)):
         self.x, self.y = left_top_coordinates
         self.width = width
         self.height = height
         self.color = color
 
     def collision(self, x, y):
-        return \
-            self.x <= x <= self.x + self.width and \
-            self.y <= y <= self.y + self.height
+        return self.x <= x <= self.x + self.width and self.y <= y <= self.y + self.height
 
     def get_coordinates(self):
-        return {'x': self.x, 'y': self.y,
-        'width': self.width, 'height': self.height}
+        return {'x': self.x, 'y': self.y, 'width': self.width, 'height': self.height}
 
 
 class CircleButton(Button):
-    def __init__(self, center_coordinates, radius, color=(255, 0 ,0)):
+    def __init__(self, center_coordinates, radius, color=(255, 0, 0)):
         self.x, self.y = center_coordinates
         self.radius = radius
         self.color = color
@@ -47,8 +32,7 @@ class CircleButton(Button):
         return (x - self.x)**2 + (y - self.y)**2 <= self.radius**2
 
     def get_coordinates(self):
-        return {'x': self.x, 'y': self.y,
-        'radius': self.radius}
+        return {'x': self.x, 'y': self.y, 'radius': self.radius}
 
 
 class Pause(CircleButton):
@@ -72,10 +56,9 @@ class DurationBar(RectButton):
 
     def try_action(self, mouse_coords, player):
         mouse_x, mouse_y = mouse_coords
-        track_percentage = (mouse_x - self.x) / self.width
-
         if self.collision(mouse_x, mouse_y):
-                self.action(player, track_percentage)
+            track_percentage = (mouse_x - self.x) / self.width
+            self.action(player, track_percentage)
 
 
 class VolumeBar(RectButton):
@@ -84,7 +67,6 @@ class VolumeBar(RectButton):
 
     def try_action(self, mouse_coords, player):
         mouse_x, mouse_y = mouse_coords
-        percentage = 1 - (mouse_y - self.y) / self.height
-
         if self.collision(mouse_x, mouse_y):
-                self.action(player, percentage)
+            percentage = 1 - (mouse_y - self.y) / self.height
+            self.action(player, percentage)
