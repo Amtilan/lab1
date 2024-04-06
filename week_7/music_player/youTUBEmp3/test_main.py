@@ -1,5 +1,5 @@
-import youtube_download
-import mp3_convert
+import youtube_download as youtube_download
+import mp3_convert as mp3_convert
 
 
 links = youtube_download.input_links()
