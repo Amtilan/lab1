@@ -129,7 +129,7 @@ def levelAdder():
     if COINS // 4 > LEVEL:
         LEVEL += 1
         SPEED += 3
-        # print(SPEED)
+        print(SPEED)
 
 #Game Loop
 while True:
@@ -177,7 +177,7 @@ while True:
     if pygame.sprite.spritecollideany(P1, coins):
             for coin in coins:
                 coin.kill()
-        #   time.sleep(1)
+            # time.sleep(1)
             # randomCoin = random.randint(1, 3)
             if COIN.randomCoin == 1:
                 COINS += 1

@@ -10,14 +10,6 @@ def download_video(url, resolution):
 def choose_resolution(resolution):
     if resolution in ["low", "360", "360p"]:
         itag = 18
-    elif resolution in ["medium", "720", "720p", "hd"]:
-        itag = 22
-    elif resolution in ["high", "1080", "1080p", "fullhd", "full_hd", "full hd"]:
-        itag = 137
-    elif resolution in ["very high", "2160", "2160p", "4K", "4k"]:
-        itag = 313
-    else:
-        itag = 18
     return itag
 
 
